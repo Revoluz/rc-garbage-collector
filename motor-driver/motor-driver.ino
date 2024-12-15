@@ -1,4 +1,6 @@
 #include <L298N.h>
+#define BLYNK_TEMPLATE_NAME "test dinamo"
+#define BLYNK_AUTH_TOKEN "7ydmmi59fWCBzsh1hr0OLBLLIEHjtY0r"
 const int motor1Pin1 = 5;  // Kontrol arah motor 1
 const int motor1Pin2 = 18;
 const int enaA = 23;       // Kontrol kecepatan motor 1
