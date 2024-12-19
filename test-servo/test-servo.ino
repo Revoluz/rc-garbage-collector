@@ -3,8 +3,8 @@
 #include <ESP32Servo.h>
 //  servo
 const int servoPin1 = 27; // Capit
-const int servoPin2 = 14; // Servo Naik/Turun
-const int servoPin3 = 26;  // Servo Rotasi (opsional)
+const int servoPin2 = 26; // Servo Naik/Turun
+const int servoPin3 = 14;  // Servo Rotasi (opsional)
 // sensor ultrasonic
 const int trigPin = 25;
 const int echoPin = 33;
@@ -25,10 +25,10 @@ void setup() {
   servo1.attach(servoPin1);
   servo2.attach(servoPin2);
   servo3.attach(servoPin3);
-  servo1.write(pos1);
-    pinMode(trigPin, OUTPUT);
+  pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
   Serial.println("Hello, ESP32!");
+  servo1.write(pos1);
 }
 void capitBuka() {
   for (; pos1 <= 180; pos1++) {
@@ -87,7 +87,7 @@ void loop() {
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
-    duration = pulseIn(echoPin, HIGH);
+  duration = pulseIn(echoPin, HIGH);
   distance = (duration * 0.0343) / 2; // Konversi ke cm
 
   // Menampilkan jarak di Serial Monitor

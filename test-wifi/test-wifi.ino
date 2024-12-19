@@ -16,7 +16,6 @@
 #define BLYNK_TEMPLATE_ID "TMPL68EEdo8Q9"
 #define BLYNK_TEMPLATE_NAME "test dinamo"
 #define BLYNK_AUTH_TOKEN "7ydmmi59fWCBzsh1hr0OLBLLIEHjtY0r"
-
 // Comment this out to disable prints and save space
 #define BLYNK_PRINT Serial
 
@@ -26,8 +25,8 @@
 
 // WiFi credentials
 char auth[] = BLYNK_AUTH_TOKEN;
-char ssid[] = "BeeCraft";
-char pass[] = "yaelahcoy";
+char ssid[] = "Redmi 13";
+char pass[] = "belisendiri";
 
 // Pin untuk motor
 const int motor1Pin1 = 5;  // Kontrol arah motor 1
@@ -49,6 +48,7 @@ int dutyCycle = 200;
 
 // Fungsi Blynk untuk move forward
 BLYNK_WRITE(V1) {  // Slider pada Virtual Pin V1
+if (param.asInt()) {
   int sliderValue = param.asInt(); // Nilai dari slider (0-255)
   Serial.println("Move Forward");
 
@@ -61,6 +61,7 @@ BLYNK_WRITE(V1) {  // Slider pada Virtual Pin V1
   // Atur kecepatan motor
   ledcWrite(pwmChannelA, dutyCycle);
   ledcWrite(pwmChannelB, dutyCycle);
+}
 }
 
 void setup() {
