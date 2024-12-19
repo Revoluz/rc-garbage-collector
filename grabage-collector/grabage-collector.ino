@@ -7,6 +7,7 @@
 #define BLYNK_TEMPLATE_NAME "test dinamo"
 #define BLYNK_AUTH_TOKEN "7ydmmi59fWCBzsh1hr0OLBLLIEHjtY0r"
 #define BLYNK_PRINT Serial
+
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <BlynkSimpleEsp32.h>
@@ -36,15 +37,15 @@ const int echoPin = 33;
 
 // Servo pins
 const int servoPin1 = 14; // Capit
-const int servoPin2 = 26; // Servo Naik/Turun
-const int servoPin3 = 27; // Servo Rotasi (opsional)
+const int servoPin2 = 26; // Servo Naik/Turun 
+const int servoPin3 = 27; // Servo Rotasi (opsional) kebalik
 
 
 
 // Servo positions
 int pos1 = 0; // Posisi servo capit
 int pos2 = 0;   // Posisi servo naik/turun
-int pos3 = 0;   // Posisi servo rotasi (opsional)
+int pos3 = 180;   // Posisi servo rotasi (opsional)
 
 // Servo instances
 Servo servo1;
@@ -100,7 +101,7 @@ void moveLeft() {
     digitalWrite(motor1Pin2, LOW);
     digitalWrite(motor2Pin3, LOW);
     digitalWrite(motor2Pin4, HIGH);
-    ledcWrite(pwmChannelA, 0);
+    ledcWrite(pwmChannelA, dutyCycle );
     ledcWrite(pwmChannelB, dutyCycle);
 }
 
@@ -147,6 +148,8 @@ void servoTurun() {
     }
     pos2 = 0;
 }
+
+
 
 // Ultrasonic sensor function
 float getDistance() {
@@ -213,18 +216,22 @@ void setup() {
 void loop() {
     Blynk.run();
 
-    // Handle motor movement
-    if (valueForward == 1) {
+    if (valueForward) {
         moveForward();
-    } else if (valueBackward == 1) {
+        Serial.println("Maju");
+    } else if (valueBackward) {
         moveBackward();
-    } else if (valueRight == 1) {
+        Serial.println("Mundur");
+    } else if (valueRight) {
         moveRight();
-    } else if (valueLeft == 1) {
+        Serial.println("Kanan");
+    } else if (valueLeft) {
         moveLeft();
+        Serial.println("Kiri");
     } else {
         stopMotors();
     }
+
 
     // Ultrasonic distance measurement
     distance = getDistance();
