@@ -25,8 +25,8 @@
 
 // WiFi credentials
 char auth[] = BLYNK_AUTH_TOKEN;
-char ssid[] = "Redmi 13";
-char pass[] = "belisendiri";
+char ssid[] = "A25";
+char pass[] = "fanan123";
 
 // Pin untuk motor
 const int motor1Pin1 = 5;  // Kontrol arah motor 1

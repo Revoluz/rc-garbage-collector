@@ -13,8 +13,8 @@
 #include <BlynkSimpleEsp32.h>
 
 char auth[] = BLYNK_AUTH_TOKEN;
-char ssid[] = "Redmi 13";
-char pass[] = "belisendiri";
+char ssid[] = "A25";
+char pass[] = "fanan123";
 
 // Motor driver pins
 const int motor1Pin1 = 5;
@@ -74,8 +74,8 @@ void moveForward() {
     digitalWrite(motor1Pin2, LOW);
     digitalWrite(motor2Pin3, LOW);
     digitalWrite(motor2Pin4, HIGH);
-    ledcWrite(pwmChannelA, dutyCycle);
-    ledcWrite(pwmChannelB, dutyCycle);
+    ledcWrite(pwmChannelA, dutyCycle); // roda kiri
+    ledcWrite(pwmChannelB, dutyCycle); // roda kanan
 }
 
 void moveBackward() {
@@ -91,17 +91,17 @@ void moveRight() {
     digitalWrite(motor1Pin1, HIGH);
     digitalWrite(motor1Pin2, LOW);
     digitalWrite(motor2Pin3, LOW);
-    digitalWrite(motor2Pin4, LOW);
+    digitalWrite(motor2Pin4, HIGH);
     ledcWrite(pwmChannelA, dutyCycle);
-    ledcWrite(pwmChannelB, 0);
+    ledcWrite(pwmChannelB, dutyCycle/2.5);
 }
 
 void moveLeft() {
-    digitalWrite(motor1Pin1, LOW);
+    digitalWrite(motor1Pin1, HIGH);
     digitalWrite(motor1Pin2, LOW);
     digitalWrite(motor2Pin3, LOW);
     digitalWrite(motor2Pin4, HIGH);
-    ledcWrite(pwmChannelA, dutyCycle );
+    ledcWrite(pwmChannelA, dutyCycle/2.5 );
     ledcWrite(pwmChannelB, dutyCycle);
 }
 
