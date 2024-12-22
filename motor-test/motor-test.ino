@@ -13,8 +13,8 @@
 #include <BlynkSimpleEsp32.h>
 
 char auth[] = BLYNK_AUTH_TOKEN;
-char ssid[] = "A25";
-char pass[] = "fanan123";
+char ssid[] = "Kontrakan Uad";
+char pass[] = "cahuad04";
 
 // Motor driver pins
 const int motor1Pin1 = 5;
@@ -37,8 +37,8 @@ const int echoPin = 33;
 
 // Servo pins
 const int servoPin1 = 14; // Capit
-const int servoPin2 = 27; // Servo Naik/Turun 
-
+const int servoPin2 = 26; // Servo Naik/Turun 
+const int servoPin3 = 27; // Servo Rotasi (opsional) kebalik
 
 
 
@@ -50,7 +50,7 @@ int pos3 = 180;   // Posisi servo rotasi (opsional)
 // Servo instances
 Servo servo1;
 Servo servo2;
-
+Servo servo3;
 // Ultrasonic distance
 long duration;
 float distance;
@@ -134,6 +134,7 @@ void capitTutup() {
 void servoNaik() {
     for (int i = pos2; i <= 180; i++) {
         servo2.write(i);
+        servo3.write(i);
         delay(15);
     }
     pos2 = 180;
@@ -142,6 +143,7 @@ void servoNaik() {
 void servoTurun() {
     for (int i = pos2; i >= 0; i--) {
         servo2.write(i);
+        servo3.write(i);
         delay(15);
     }
     pos2 = 0;
@@ -150,15 +152,15 @@ void servoTurun() {
 
 
 // Ultrasonic sensor function
-float getDistance() {
-    digitalWrite(trigPin, LOW);
-    delayMicroseconds(2);
-    digitalWrite(trigPin, HIGH);
-    delayMicroseconds(2);
-    digitalWrite(trigPin, LOW);
-    duration = pulseIn(echoPin, HIGH, 30000); // Timeout 30ms
-    return (duration * 0.0343) / 2;
-}
+// float getDistance() {
+//     digitalWrite(trigPin, LOW);
+//     delay(2000);
+//     digitalWrite(trigPin, HIGH);
+//     delayMicroseconds(10);
+//     digitalWrite(trigPin, LOW);
+//     duration = pulseIn(echoPin, HIGH, 30000); // Timeout 30ms
+//     return (duration * 0.0343) / 2;
+// }
 
 // Trash handling function
 void putTrash() {
@@ -198,9 +200,10 @@ void setup() {
     // Initialize servo
     servo1.attach(servoPin1);
     servo2.attach(servoPin2);
-    
+    servo3.attach(servoPin3);
     servo1.write(pos1);
     servo2.write(pos2);
+    servo3.write(pos3);
 
     // Initialize ultrasonic sensor
     pinMode(trigPin, OUTPUT);
@@ -230,18 +233,13 @@ void loop() {
     }
 
 
-    // Ultrasonic distance measurement
-    distance = getDistance();
-  
-    Serial.print("Distance: ");
-    Serial.print(distance);
-    Serial.println(" cm");
 
     // Trash handling based on distance
-    if ((distance > 0 && distance > 12) && distance < 13.5) {
+    if (distance > 0 && distance > 14 && distance < 16.5) {
         putTrash();
-        delay(4000);
+        delay(2500);
     } else {
         Serial.println("No object detected. Waiting...");
+        // delay(1000);
     }
 }

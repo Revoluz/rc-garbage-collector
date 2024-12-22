@@ -1,9 +1,11 @@
 #include <ESP32Servo.h>
 
 // Servo
+// Servo pins
 const int servoPin1 = 14; // Capit
-const int servoPin2 = 26; // Naik/Turun
-const int servoPin3 = 27; // Rotasi (opsional)
+const int servoPin2 = 26; // Servo Naik/Turun 
+const int servoPin3 = 27; // Servo Rotasi (opsional) kebalik
+// Ultrasonic sensor pins
 const int trigPin = 25;
 const int echoPin = 33;
 
@@ -114,7 +116,7 @@ void loop() {
     if (distance <= 49) {
         putTrash();
     } else {
-        Serial.println("No object detected. Waiting...");
+        // Serial.println("No object detected. Waiting...");
         delay(1000);
     }
 }
